@@ -14,8 +14,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     baseTemplate = "redirect.tmpl"
   }
   fp := path.Join("templates", baseTemplate)
-
-  tmpl, _ := template.ParseFiles(lp, fp)
+  tmpl, _ := template.New("").Delims("<<", ">>").ParseFiles(lp, fp)
   tmpl.ExecuteTemplate(w, "layout", nil)
 }
 

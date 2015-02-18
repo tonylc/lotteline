@@ -1,9 +1,9 @@
-{{ define "layout" }}
+<< define "layout" >>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    {{ template "stylesheet" }}
+    << template "stylesheet" >>
     <style>
       #header {
         margin-top: 25%;
@@ -46,8 +46,8 @@
     </style>
   </head>
   <body>
-    {{ template "body" }}
-    {{ template "script" }}
+    << template "body" >>
+    << template "script" >>
   </body>
 </html>
-{{ end }}
+<< end >>
