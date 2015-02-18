@@ -11,7 +11,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   lp := path.Join("templates", "layout.tmpl")
   var baseTemplate = r.URL.Path + ".tmpl"
   if r.URL.Path == "/" {
-    baseTemplate = "home.tmpl"
+    baseTemplate = "redirect.tmpl"
   }
   fp := path.Join("templates", baseTemplate)
 
