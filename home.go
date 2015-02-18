@@ -1,7 +1,6 @@
 package lotteline
 
 import (
-  // "fmt"
   "html/template"
   "log"
   "net/http"
@@ -9,13 +8,12 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-  // fmt.Fprintf(w, "request path", r.URL, r.URL.Path)
-  // t, _ := template.ParseFiles("templates/home.html")
-  //t, _ := template.ParseFiles("templates/redirect.html")
-  // t.Execute(w, nil)
-
   lp := path.Join("templates", "layout.tmpl")
-  fp := path.Join("templates", r.URL.Path + ".tmpl")
+  var baseTemplate = r.URL.Path + ".tmpl"
+  if r.URL.Path == "/" {
+    baseTemplate = "home.tmpl"
+  }
+  fp := path.Join("templates", baseTemplate)
 
   tmpl, _ := template.ParseFiles(lp, fp)
   tmpl.ExecuteTemplate(w, "layout", nil)
