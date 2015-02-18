@@ -16,11 +16,12 @@
 << define "body" >>
 <div class="debug" ng-app="lottelineStore" ng-controller="StoreController as store">
   <div class="row">
-    <div class="col-md-4" ng-repeat="product in store.products">
+    <div class="col-md-4" ng-repeat-start="product in store.products">
       {{product.name}}
       <em class="pull-right">{{product.price | currency}}</em>
-      <img class="col-md-8" ng-click="store.goToEtsy(product.shopLink)" ng-src="{{product.img}}" />
+      <img class="col-md-12" ng-click="store.goToEtsy(product.shopLink)" ng-src="{{product.img}}" />
     </div>
+    <div class="clearfix" ng-show="$index % 3 == 2" ng-repeat-end></div>
   </div>
 </div>
 << end >>
@@ -38,7 +39,7 @@
     {
       'name': 'grosgrain knot headband - 3 for 12.00',
       'price': '12',
-      'img': 'https://img1.etsystatic.com/059/0/8614425/il_570xN.721106141_oinu.jpg',
+      'img': 'https://img1.etsystatic.com/057/1/8614425/il_570xN.722253753_itzf.jpg',
       'shopLink': 'https://www.etsy.com/listing/219991973/grosgrain-knot-headband-3-for-1200?ref=shop_home_active_1',
     },
     {
