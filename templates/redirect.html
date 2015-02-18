@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <style>
+      #header {
+        margin-top: 25%;
+        text-align: center;
+      }
+
+      #header h1 {
+
+      }
+
+      .one {
+          opacity: 0;
+          -webkit-animation: dot 1.3s infinite 0s;
+          animation: dot 1.3s infinite 0s;
+      }
+
+      .two {
+          opacity: 0;
+          -webkit-animation: dot 1.3s infinite 0.1s;
+          animation: dot 1.3s infinite 0.1s;
+      }
+
+      .three {
+        opacity: 0;
+        -webkit-animation: dot 1.3s infinite 0.2s;
+        animation: dot 1.3s infinite 0.2s;
+      }
+
+      @-webkit-keyframes dot {
+            0% { opacity: 0; }
+           50% { opacity: 0; }
+          100% { opacity: 1; }
+      }
+
+      @keyframes dot {
+            0% { opacity: 0; }
+           50% { opacity: 0; }
+          100% { opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id='header'>
+      <h1>Coming Soon</h1>
+      <div>
+        Redirecting you to the Etsy Shop
+        <span class="one">.</span>
+        <span class="two">.</span>
+        <span class="three">.</span>
+      </div>
+    </div>
+    <script>
+      window.onload = function() {
+        setTimeout(function() {
+          window.location.href = 'https://www.etsy.com/shop/lotteline';
+        }, 2000);
+      };
+    </script>
+  </body>
+</html>
