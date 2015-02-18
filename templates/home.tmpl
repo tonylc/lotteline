@@ -1,17 +1,70 @@
 << define "stylesheet" >>
+<style>
+  .debug .col-md-4,
+  .debug .col-md-4 em,
+  .debug .col-md-4 img {
+    border: 1px solid;
+  }
+  .col-md-4,
+  .col-md-4 em,
+  .col-md-4 img {
+    border: none;
+  }
+</style>
 << end >>
 
 << define "body" >>
-<div id="header">
-  <h1>Coming Soon</h1>
-  <div>
-    Redirecting you to the Etsy Shop
-    <span class="one">.</span>
-    <span class="two">.</span>
-    <span class="three">.</span>
+<div class="debug" ng-app="lottelineStore" ng-controller="StoreController as store">
+  <div class="row">
+    <div class="col-md-4" ng-repeat="product in store.products">
+      {{product.name}}
+      <em class="pull-right">{{product.price | currency}}</em>
+      <img class="col-md-8" ng-click="store.goToEtsy(product.shopLink)" ng-src="{{product.img}}" />
+    </div>
   </div>
 </div>
 << end >>
 
 << define "script" >>
+<script>
+  var app = angular.module('lottelineStore', ['ui.bootstrap']);
+  app.controller('StoreController', function() {
+    this.products = products;
+    this.goToEtsy = function(link) {
+      window.location.href = link;
+    };
+  });
+  var products = [
+    {
+      'name': 'grosgrain knot headband - 3 for 12.00',
+      'price': '12',
+      'img': 'https://img1.etsystatic.com/059/0/8614425/il_570xN.721106141_oinu.jpg',
+      'shopLink': 'https://www.etsy.com/listing/219991973/grosgrain-knot-headband-3-for-1200?ref=shop_home_active_1',
+    },
+    {
+      'name': 'grosgrain flat bow - single',
+      'price': '8',
+      'img': 'https://img1.etsystatic.com/048/0/8614425/il_570xN.722253031_2cha.jpg',
+      'shopLink': 'https://www.etsy.com/listing/219340767/grosgrain-flat-bow-single?ref=shop_home_active_2',
+    },
+    {
+      'name': 'grosgrain knot bow clips - 3 for 12.00',
+      'price': '12',
+      'img': 'https://img1.etsystatic.com/057/0/8614425/il_570xN.721086297_268y.jpg',
+      'shopLink': 'https://www.etsy.com/listing/220938356/grosgrain-knot-bow-clips-3-for-1200?ref=shop_home_active_3',
+    },
+    {
+      'name': 'grosgrain flat bow - double',
+      'price': '10',
+      'img': 'https://img0.etsystatic.com/056/0/8614425/il_570xN.722123254_kbnx.jpg',
+      'shopLink': 'https://www.etsy.com/listing/221149433/grosgrain-flat-bow-double?ref=shop_home_active_4',
+    },
+    {
+      'name': 'top knot bow headband for baby and kids - nylon headband - nylon headwrap',
+      'price': '12',
+      'img': 'https://img0.etsystatic.com/050/0/8614425/il_570xN.713376426_hl0o.jpg',
+      'shopLink': 'https://www.etsy.com/listing/218961983/top-knot-bow-headband-for-baby-and-kids?ref=shop_home_active_5',
+    }
+  ];
+</script>
 << end >>
