@@ -1,0 +1,7 @@
+<< define "body" >>
+<div class="ll-listing" data-listing-desc="{{product.name}}" data-listing-price="{{product.price | currency}}">
+  <img class="listing-img img-responsive img-rounded"
+      ng-click="store.goToEtsy(product.shopLink)"
+      ng-src="{{product.img}}" />
+</div>
+<< end >>

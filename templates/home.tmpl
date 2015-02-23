@@ -1,5 +1,8 @@
 << define "stylesheet" >>
 <style>
+  .gallery {
+    position: relative;
+  }
   .debug .col-md-4,
   .debug .col-md-4 em,
   .debug .col-md-4 img {
@@ -10,18 +13,28 @@
   .col-md-4 img {
     border: none;
   }
+  .listing-img:hover {
+    cursor: pointer;
+  }
+  .listing-highlight {
+    position: absolute;
+  }
+  .listing-highlight .listing-img {
+    float: left;
+  }
 </style>
 << end >>
 
 << define "body" >>
-<div class="debug" ng-app="lottelineStore" ng-controller="StoreController as store">
-  <div class="row">
-    <div class="col-md-4" ng-repeat-start="product in store.products">
-      {{product.name}}
-      <em class="pull-right">{{product.price | currency}}</em>
-      <img class="col-md-12" ng-click="store.goToEtsy(product.shopLink)" ng-src="{{product.img}}" />
-    </div>
-    <div class="clearfix" ng-show="$index % 3 == 2" ng-repeat-end></div>
+<div class="gallery debug" ng-app="lottelineStore" ng-controller="StoreController as store">
+  <div class="listing col-xs-6 col-md-3" ng-repeat-start="product in store.products">
+    <ll-listing class="test" remove-class="test"></ll-listing>
+  </div>
+  <div class="clearfix" ng-show="$index % 4 == 3" ng-repeat-end></div>
+  <div class="listing-highlight col-xs-6 col-md-3" ng-show="showListing">
+    <img class="listing-img"/>
+    <p class="listing-desc">
+    <p class="listing-price">
   </div>
 </div>
 << end >>
@@ -29,10 +42,35 @@
 << define "script" >>
 <script>
   var app = angular.module('lottelineStore', ['ui.bootstrap']);
-  app.controller('StoreController', function() {
+  app.controller('StoreController', function($scope) {
     this.products = products;
+    $scope.showListing = "abc";
     this.goToEtsy = function(link) {
       window.location.href = link;
+    };
+  })
+  .directive('llListing', function() {
+    return {
+      restrict: 'E',
+      templateUrl: "templates/ll-listing.html",
+      link: function(scope, element, attrs) {
+        var sc = scope;
+        var el = element[0];
+        var listing = document.querySelector('.listing-highlight');
+        element.on('mouseenter', function(event) {
+          sc.showListing = true;
+          var currentEl = el.querySelector('.ll-listing');
+          listing.replaceChild(
+            currentEl.querySelector('.listing-img').cloneNode(),
+            listing.querySelector('.listing-img'))
+          listing.querySelector('.listing-desc').textContent =
+              currentEl.dataset.listingDesc;
+          listing.querySelector('.listing-price').textContent =
+              currentEl.dataset.listingPrice;
+        }).on('mouseleave', function() {
+          sc.showListing = false;
+        });
+      }
     };
   });
   var products = [
